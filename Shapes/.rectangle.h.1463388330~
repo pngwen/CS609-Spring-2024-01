@@ -1,0 +1,31 @@
+///////////////////////////////////////////////////////////////////////////
+// File: rectangle.h
+// Purpose: A drawable which draws an hour glass
+// Author: Sainatha Reddy Siripireddy <ssiripireddy1s@semo.edu>
+
+///////////////////////////////////////////////////////////////////////////
+
+#ifndef rectangle_h
+#define rectangle_h
+#include "drawable.h"
+g class Rectangle : public Drawable {
+public:
+  // Constructor
+  // Parameters:
+  //   x - x-coordinate of the upper left corner of the rectangle
+  //   y - y-coordinate of the upper left corner of the rectangle
+  //   w - width of the rectangle
+  //   h - height of the rectangle
+  Rectangle(int _x, int _y, int _w, int _h);
+
+  // Draw the rectangle
+  virtual void draw(Canvas *canvas);
+
+private:
+  int _x;
+  int _y;
+  int _w;
+  int _h;
+};
+
+#endif
