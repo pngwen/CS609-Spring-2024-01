@@ -14,6 +14,6 @@ octagon_test: canvas.o drawable.o octagon.o octagon_test.o
 star_test: canvas.o drawable.o star.o star_test.o
 rectangle_test: canvas.o drawable.o rectangle.o rectangle_test.o
 pentagon_test: canvas.o drawable.o pentagon.o pentagon_test.o
-cd 
+
 clean:
 	rm -f $(TARGETS) *.o
