@@ -17,5 +17,17 @@ OneNode::~OneNode() {
 // Attempt to match the string beginning at the given position.
 bool OneNode::match(const std::string &str, size_t &pos) {
   // YOUR CODE HERE
-  return false;
+  size_t initialPos = pos;
+  size_t lastPos = pos;
+
+  while(_node->match(str, pos)) {
+    lastPos = pos;
+  }
+
+  if(lastPos > initialPos){
+    pos = lastPos;
+    return true;
+  }
+
+  return false;  
 }
