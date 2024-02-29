@@ -18,6 +18,7 @@ bool ZeroNode::match(const std::string &str, size_t &pos) {
   // return true if match is successful
   while (_node->match(str, pos)&& pos<str.length()) {
     pos++;
+    
   }
   return pos>=0;
 }
