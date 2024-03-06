@@ -16,9 +16,10 @@ bool ZeroNode::match(const std::string &str, size_t &pos) {
   // YOUR CODE HERE
   // Match node as many times as possible
   // return true if match is successful
-  while (_node->match(str, pos)&& pos<str.length()) {
-    pos++;
-    
+  size_t initialPos = pos;
+  while (_node->match(str, pos)) {
+    initialPos = pos;
   }
-  return pos>=0;
+  pos = initialPos;
+  return true;
 }
