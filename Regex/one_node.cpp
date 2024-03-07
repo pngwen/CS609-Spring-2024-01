@@ -22,17 +22,4 @@ bool OneNode::match(const std::string &str, size_t &pos) {
     return true;
   else
     return false;
-  size_t initialPos = pos;
-  size_t lastPos = pos;
-
-  while (_node->match(str, pos)) {
-    lastPos = pos;
-  }
-
-  if (lastPos > initialPos) {
-    pos = lastPos;
-    return true;
-  }
-
-  return false;
 }
