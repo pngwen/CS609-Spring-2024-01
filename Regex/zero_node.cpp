@@ -18,8 +18,12 @@ bool ZeroNode::match(const std::string &str, size_t &pos) {
   // return true if match is successful
   size_t initialPos = pos;
   while (_node->match(str, pos)) {
-    initialPos = pos;
+    if (pos == initialPos) {
+  // Avoid infinite loop if the position does not change after a successful match
+      break;
+    }
+    initialPos = pos; // Update initial position whenever a match occurs
   }
-  pos = initialPos;
-  return true;
+  pos = initialPos; // Reset position to initial position after matching zero or more times
+  return true; // Always return true since zero occurrences is a valid match
 }
