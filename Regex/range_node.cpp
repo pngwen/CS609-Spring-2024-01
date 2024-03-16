@@ -15,6 +15,10 @@ RangeNode::RangeNode(char _start, char _end)
 // attempt to match the string at position pos
 bool RangeNode::match(const std::string& str, size_t &pos)
 {
-  // YOUR CODE HERE
+  if( pos < str.length() && str[pos] >= _start && str[pos] <= _end) {
+    pos++;
+    return true;
+  }
+
   return false;
 }
