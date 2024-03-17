@@ -134,6 +134,29 @@ RegexNode *construct_regex4() {
   GroupNode *regex = new GroupNode();
 
   // YOUR CODE HERE
+  // Author: sravani neerudu <sneerudu1s@semo.edu>
+  // Author: madhu chandana musipatla <mmusipatla1s@semo.edu>
+  // Author: sai sreeja yalla <syalla1s@semo.edu>
+
+  // create nodes for [0-9]+
+  GroupNode *digits = new GroupNode();
+  digits->add_node(new RangeNode('0', '9')); // Matches a digit
+  OneNode *one_or_more_digits =
+      new OneNode(digits); // Matches one or more digits
+
+  // create nodes for (\.[0-9]+)?
+  GroupNode *decimal_part = new GroupNode();
+  decimal_part->add_node(new CharacterNode('.')); // Matches a literal '.'
+  GroupNode *decimal_digits = new GroupNode();
+  decimal_digits->add_node(new RangeNode('0', '9')); // Matches a digit
+  OneNode *one_or_more_decimal_digits = new OneNode(
+      decimal_digits); // Matches one or more digits after the decimal point
+  OptionalNode *optional_decimal_part =
+      new OptionalNode(decimal_part); // Makes the decimal part optional
+
+  // add nodes to regex
+  regex->add_node(one_or_more_digits);
+  regex->add_node(optional_decimal_part);
 
   return regex;
 }
