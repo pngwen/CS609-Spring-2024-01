@@ -100,19 +100,18 @@ RegexNode *construct_regex1() {
 
 // Construct regular expression (ab)+ac
 RegexNode *construct_regex2() {
-  // Group node for Outer Group ((ab)+ac)
+  // author: Lokeswara Ravindra Rao Kolli<lkolli1s@semo.edu>
+  // author: pavan
+  //  create the result
   GroupNode *regex = new GroupNode();
 
-  // Group node for Inner Group (ab)
+  // YOUR CODE HERE
   GroupNode *ab = new GroupNode();
   ab->add_node(new CharacterNode('a'));
   ab->add_node(new CharacterNode('b'));
+  OneNode *plus_ab = new OneNode(ab);
 
-  // For one or more block i.e., +.
-  OneNode *plus = new OneNode(ab);
-  regex->add_node(plus);
-
-  // Last part. ac.
+  regex->add_node(plus_ab);
   regex->add_node(new CharacterNode('a'));
   regex->add_node(new CharacterNode('c'));
 
@@ -124,19 +123,19 @@ RegexNode *construct_regex3() {
   // create the result
   GroupNode *regex = new GroupNode();
 
-  //Yashasri Boppana;Rakesh Vaddepally;Pallavi Mekala;Durgaprasad Tiyyagura
+  // Yashasri Boppana;Rakesh Vaddepally;Pallavi Mekala;Durgaprasad Tiyyagura
 
   // YOUR CODE HERE
-  OrNode *inner_or = new OrNode(); 
-  inner_or->add_node(new CharacterNode('a')); 
+  OrNode *inner_or = new OrNode();
+  inner_or->add_node(new CharacterNode('a'));
 
-  GroupNode *aa = new GroupNode(); 
-  aa->add_node(new CharacterNode('a')); 
+  GroupNode *aa = new GroupNode();
   aa->add_node(new CharacterNode('a'));
-  inner_or->add_node(aa); 
+  aa->add_node(new CharacterNode('a'));
+  inner_or->add_node(aa);
 
   regex->add_node(inner_or);
-  regex->add_node(new CharacterNode('b')); 
+  regex->add_node(new CharacterNode('b'));
 
   return regex;
 }
