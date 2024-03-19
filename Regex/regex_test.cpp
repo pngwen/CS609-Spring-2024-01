@@ -124,7 +124,19 @@ RegexNode *construct_regex3() {
   // create the result
   GroupNode *regex = new GroupNode();
 
+  //Yashasri Boppana;Rakesh Vaddepally;Pallavi Mekala;Durgaprasad Tiyyagura
+
   // YOUR CODE HERE
+  OrNode *inner_or = new OrNode(); 
+  inner_or->add_node(new CharacterNode('a')); 
+
+  GroupNode *aa = new GroupNode(); 
+  aa->add_node(new CharacterNode('a')); 
+  aa->add_node(new CharacterNode('a'));
+  inner_or->add_node(aa); 
+
+  regex->add_node(inner_or);
+  regex->add_node(new CharacterNode('b')); 
 
   return regex;
 }
