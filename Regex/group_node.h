@@ -1,6 +1,7 @@
 // File: group_node.h
 // Purpose: Match a group of RegexNodes.
 // Author: Robert Lowe
+// Author: Jake Stinson
 #ifndef GROUP_NODE_H
 #define GROUP_NODE_H
 #include <string>

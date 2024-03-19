@@ -1,6 +1,7 @@
 // File: group_node.cpp
 // Purpose: Match a group of RegexNodes.
 // Author: Robert Lowe
+// Author: Jake Stinson
 #include "group_node.h"
 #include <string>
 #include <vector>

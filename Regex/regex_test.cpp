@@ -123,7 +123,7 @@ RegexNode *construct_regex3() {
   // create the result
   GroupNode *regex = new GroupNode();
 
-  // Yashasri Boppana;Rakesh Vaddepally;Pallavi Mekala;Durgaprasad Tiyyagura
+  // Yashasri Boppana;Rakesh Vaddepally;Pallavi Mekala;Durgaprasad Tiyyagura; Jake Stinson
 
   // YOUR CODE HERE
   OrNode *inner_or = new OrNode();
@@ -183,6 +183,7 @@ RegexNode *construct_regex5() {
   // Author: Rohith Patel, Kanchukatla
   // Author: Naveen, Dondapati
 
+
   
   //Create the rangenode for the lowercase letters
   RangeNode *lowercase_range = new RangeNode('a', 'z');
@@ -205,10 +206,20 @@ RegexNode *construct_regex5() {
 }
 
 // Construct the regular expression "[^"]*"
+//Author: Jake Stinson
 RegexNode *construct_regex6() {
   GroupNode *regex = new GroupNode();
 
-  // YOUR CODE HERE
+  // Match the opening quote
+  regex->add_node(new CharacterNode('"'));
+
+  // Match any character except the quote, zero or more times
+  InverseNode *not_quote = new InverseNode(new CharacterNode('"'));
+  ZeroNode *zero_or_more_not_quote = new ZeroNode(not_quote);
+  regex->add_node(zero_or_more_not_quote);
+
+  // Match the closing quote
+  regex->add_node(new CharacterNode('"'));
 
   return regex;
 }
