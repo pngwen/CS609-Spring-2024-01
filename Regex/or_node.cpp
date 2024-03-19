@@ -14,8 +14,12 @@ OrNode::~OrNode() {
 
 // perform a greedy or match on the given string starting at pos
 bool OrNode::match(const std::string &str, size_t &pos) {
-  // YOUR CODE HERE
-  return false;
+  for(auto node :_nodes){
+    if(node->match(str,pos)){
+      return true; 
+    }
+  }
+   return false;
 }
 
 
