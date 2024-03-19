@@ -2,6 +2,7 @@
 //Purpose: Implements a multi-way or operator.
 //Author: Robert Lowe
 //Akhileshwar Mugala
+//KrishnaSai Kavuri
 #include <string>
 #include <vector>
 #include "or_node.h"
