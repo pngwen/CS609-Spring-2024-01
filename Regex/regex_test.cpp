@@ -174,10 +174,33 @@ RegexNode *construct_regex4() {
 
 // Construct the regular expression [a-zA-Z]+
 RegexNode *construct_regex5() {
+
+  //Create the result regex node
   GroupNode *regex = new GroupNode();
 
   // YOUR CODE HERE
+  // Author: Sainatha Reddy, Siripireddy
+  // Author: Rohith Patel, Kanchukatla
+  // Author: Naveen, Dondapati
 
+  
+  //Create the rangenode for the lowercase letters
+  RangeNode *lowercase_range = new RangeNode('a', 'z');
+
+  //Create the rangenode for the uppercase letters
+  RangeNode *uppercase_range = new RangeNode('A', 'Z');
+
+  //Create an OrNode to represent the alternation between the lowercase and uppercase letters
+  OrNode *or_Node = new OrNode();
+  or_Node->add_node(lowercase_range);
+  or_Node->add_node(uppercase_range);
+
+  //Create a OneNode to represent the one or more occurence of alternation
+  OneNode *one_node = new OneNode(or_Node);
+
+  //Add the one_node to the result regex node
+  regex->add_node(one_node);
+  
   return regex;
 }
 
