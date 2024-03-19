@@ -1,6 +1,7 @@
 //File: or_node.cpp
 //Purpose: Implements a multi-way or operator.
 //Author: Robert Lowe
+//Akhileshwar Mugala
 #include <string>
 #include <vector>
 #include "or_node.h"
