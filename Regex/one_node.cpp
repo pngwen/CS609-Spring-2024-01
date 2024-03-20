@@ -1,6 +1,8 @@
 // File: one_node.cpp
 // Purpose: The one node matches the one or more quantifier.
 // Author: Robert Lowe
+// Author: Avinash abbina, Sai Kumar Reddy Boreddy, Harshith Sai Battula, Vamshi
+// Swarna, Nagaraju Bommanaboina.
 #include "one_node.h"
 #include <iostream>
 #include <string>
