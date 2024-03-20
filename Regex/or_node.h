@@ -1,5 +1,6 @@
 //File: or_node.h
 //Purpose: Implements a multi-way or operator.
+//Author: Akhileshwar Mugala
 //Author: KrishnaSai Kavuri
 //Author: Saqlain Abbas Ali Khan
 //Author: Govindaiah Chowdary Pentala
