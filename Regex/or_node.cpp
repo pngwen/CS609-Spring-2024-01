@@ -4,6 +4,7 @@
 //Akhileshwar Mugala
 //KrishnaSai Kavuri
 //Saqlain Abbas Ali Khan
+//Govindaiah Chowdary Pentala
 #include <string>
 #include <vector>
 #include "or_node.h"
