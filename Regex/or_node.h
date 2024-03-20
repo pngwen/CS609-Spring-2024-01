@@ -1,6 +1,7 @@
 //File: or_node.h
 //Purpose: Implements a multi-way or operator.
 //Author: KrishnaSai Kavuri
+//Author: Saqlain Abbas Ali Khan
 #ifndef OR_NODE_H
 #define OR_NODE_H
 #include <string>
