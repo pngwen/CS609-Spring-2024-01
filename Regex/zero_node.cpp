@@ -1,6 +1,9 @@
 // File: zero_node.cpp
 // Purpose: The zero node matches the zero or more quantifier.
 // Author: Robert Lowe
+//Kapil Kumar Reddy Cheemarla
+//Yash Barot
+//Mahesh Munna
 #include "zero_node.h"
 #include <string>
 
@@ -19,11 +22,13 @@ bool ZeroNode::match(const std::string &str, size_t &pos) {
   size_t initialPos = pos;
   while (_node->match(str, pos)) {
     if (pos == initialPos) {
-  // Avoid infinite loop if the position does not change after a successful match
+      //to avoid infinite loop if the position doesn't change after a match.
+  
       break;
     }
-    initialPos = pos; // Update initial position whenever a match occurs
+    //need to update initial position whenever a matched occur
+    initialPos = pos; 
   }
-  pos = initialPos; // Reset position to initial position after matching zero or more times
-  return true; // Always return true since zero occurrences is a valid match
+  pos = initialPos; 
+  return true; 
 }
