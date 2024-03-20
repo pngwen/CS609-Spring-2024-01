@@ -2,6 +2,7 @@
 //Purpose: Implements a multi-way or operator.
 //Author: KrishnaSai Kavuri
 //Author: Saqlain Abbas Ali Khan
+//Author: Govindaiah Chowdary Pentala
 #ifndef OR_NODE_H
 #define OR_NODE_H
 #include <string>
