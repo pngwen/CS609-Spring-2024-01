@@ -1,5 +1,6 @@
 { pkgs }: {
     deps = [
+      pkgs.gnu-smalltalk
       pkgs.tecoc
       pkgs.gnu-cobol.bin
       pkgs.cowsay
