@@ -1,36 +1,27 @@
 // File: pow_node.cpp
-// Purpose: Implementation of the exponent node.
-#include <iostream>
-#include <cmath>
+// Purpose: Implementation of the exponentiation (power) node.
 #include "pow_node.h"
-#include "calculator_lexer.h"
+#include <cmath> // For pow()
 
-ASTResult PowNode::apply(const ASTResult &lhs, const ASTResult &rhs) {
+ASTResult PowNode::apply(const ASTResult &left, const ASTResult &right) {
   ASTResult result;
 
-  // assume an integer type
-  result.type = ASTResult::INT;
+  // Exponentiation outcomes are simplified to REAL for simplicity and to accommodate
+  // large or fractional powers.
+  result.type = ASTResult::REAL;
 
-  /* Possible Evaluations
-      INT, INT -> INT    .i ^ .i
-      REAL, REAL -> REAL  .r ^ .r
-      INT, REAL -> REAL   .i ^ .r
-      REAL, INT -> REAL   .r ^ .i
-   */
-  if(lhs.type == ASTResult::INT && rhs.type == ASTResult::INT) {
+  if(left.type == ASTResult::INT && right.type == ASTResult::INT) {
     result.type = ASTResult::INT;
-    result.value.i = (int) pow(lhs.value.i, rhs.value.i);
-  } else if(lhs.type == ASTResult::REAL && rhs.type == ASTResult::REAL) {
-    result.type = ASTResult::REAL;
-    result.value.r = pow(lhs.value.r, rhs.value.r);
-  } else if(lhs.type == ASTResult::INT && rhs.type == ASTResult::REAL) {
-    result.type = ASTResult::REAL;
-    result.value.r = pow(lhs.value.i, rhs.value.r);
-  } else if(lhs.type == ASTResult::REAL && rhs.type == ASTResult::INT) {
-    result.type = ASTResult::REAL;
-    result.value.r = pow(lhs.value.i, rhs.value.r);
+    result.value.i = (int) std::pow(static_cast<double>(left.value.i), right.value.i);
+  } else if(left.type == ASTResult::REAL && right.type == ASTResult::REAL) {
+    result.value.r = std::pow(left.value.r, right.value.r);
+  } else if(left.type == ASTResult::INT && right.type == ASTResult::REAL) {
+    result.value.r = std::pow(static_cast<double>(left.value.i), right.value.r);
+  } else if(left.type == ASTResult::REAL && right.type == ASTResult::INT) {
+    result.value.r = std::pow(left.value.r, static_cast<double>(right.value.i));
   } else {
-    std::cerr << "Error: Invalid types for exponent" << std::endl;
+    // Handle invalid cases or errors
+    result.type = ASTResult::VOID;
   }
 
   return result;

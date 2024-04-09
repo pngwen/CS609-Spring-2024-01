@@ -1,35 +1,30 @@
 // File: add_node.cpp
-// Purpose: Implementation of the add node.
-#include <iostream>
+// Purpose: Implementation of the addition node.
 #include "add_node.h"
-#include "calculator_lexer.h"
 
-ASTResult AddNode::apply(const ASTResult &lhs, const ASTResult &rhs) {
+ASTResult AddNode::apply(const ASTResult &left, const ASTResult &right) {
   ASTResult result;
-
-  // assume an integer type
-  result.type = ASTResult::INT;
-
-  /* Possible Evaluations
-      INT, INT -> INT    .i + .i
-      REAL, REAL -> REAL  .r + .r
-      INT, REAL -> REAL   .i + .r
-      REAL, INT -> REAL   .r + .i
-   */
-  if(lhs.type == ASTResult::INT && rhs.type == ASTResult::INT) {
+  
+  // Possible type outputs (Attribute Grammar)
+  // INT + INT -> INT     .i + .i
+  // REAL + REAL -> REAL   .r + .r
+  // INT + REAL -> REAL    .i + .r
+  // REAL + INT -> REAL    .r + .i
+  if(left.type == ASTResult::INT && right.type == ASTResult::INT) {
     result.type = ASTResult::INT;
-    result.value.i = lhs.value.i + rhs.value.i;
-  } else if(lhs.type == ASTResult::REAL && rhs.type == ASTResult::REAL) {
+    result.value.i = left.value.i + right.value.i;
+  } else if(left.type == ASTResult::REAL && right.type == ASTResult::REAL) {
     result.type = ASTResult::REAL;
-    result.value.r = lhs.value.r + rhs.value.r;
-  } else if(lhs.type == ASTResult::INT && rhs.type == ASTResult::REAL) {
+    result.value.r = left.value.r + right.value.r;
+  } else if(left.type == ASTResult::INT && right.type == ASTResult::REAL) {
     result.type = ASTResult::REAL;
-    result.value.r = lhs.value.i + rhs.value.r;
-  } else if(lhs.type == ASTResult::REAL && rhs.type == ASTResult::INT) {
+    result.value.r = left.value.i + right.value.r;
+  } else if(left.type == ASTResult::REAL && right.type == ASTResult::INT) {
     result.type = ASTResult::REAL;
-    result.value.r = lhs.value.i + rhs.value.r;
+    result.value.r = left.value.r + right.value.i;
   } else {
-    std::cerr << "Error: Invalid types for addition" << std::endl;
+    //TODO: Handle errors here
+    result.type = ASTResult::VOID;
   }
 
   return result;

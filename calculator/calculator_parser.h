@@ -1,5 +1,6 @@
 // File: calculator_parser.h
 // Purpose: This file contains the definition of the calculator parser.
+// Author: Robert Lowe
 #ifndef CALCULATOR_PARSER_H
 #define CALCULATOR_PARSER_H
 #include "ast_node.h"
@@ -8,21 +9,33 @@
 class CalculatorParser {
 public:
   ASTNode *parse(CalculatorLexer *_lexer);
+
 private:
   CalculatorLexer *_lexer;
   Lexer::Token _cur;
 
+  // advance the lexer
   void next();
 
-  //< Expression > ::= < Term > < Expression' >
+  // check to see if the cur  rent token matches the given token
+  bool has(int t);
+
+  // < Expression > ::= < Ref > < Expression' > 
+  //                    | < Sum >                       
   ASTNode *parse_expression();
 
-  //< Expression' >::= ADD < Term > < Expression' >
-  //                   | SUB < Term > < Expression' >
-  //                   | ""
+  // < Expression' > ::= ASSIGN < Expression >
+  //                     | < Sum' >
   ASTNode *parse_expression2(ASTNode *left);
-  
-  
+
+  //< Sum > ::= < Term > < Sum' >
+  ASTNode *parse_sum();
+
+  //< Sum' >::= ADD < Term > < Sum' >
+  //                   | SUB < Term > < Sum' >
+  //                   | ""
+  ASTNode *parse_sum2(ASTNode *left);
+                     
   //< Term >       ::= < Factor > < Term' > 
   ASTNode *parse_term();
 
@@ -37,11 +50,15 @@ private:
   //< Factor' >    ::= POW < Exponent >
   //                   | ""
   ASTNode *parse_factor2(ASTNode *left);
-  
+
   //< Exponent >   ::= INT 
   //                   | REAL
+  //                   | < Ref >
   //                   | LPAR < Expression > RPAR
   ASTNode *parse_exponent();
+
+  //< Ref >        ::= ID
+  ASTNode *parse_ref();
 };
 
-#endif 
+#endif
