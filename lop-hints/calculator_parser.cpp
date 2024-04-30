@@ -13,6 +13,8 @@
 #include "if_node.h"
 #include "stop_node.h"
 #include "statements_node.h"
+#include "loop_node.h"
+#include "equal_node.h"
 #include <stdexcept>
 
 // advance the lexer
@@ -26,6 +28,7 @@ bool CalculatorParser::has(int t) { return _cur.tok == t; }
 //                    | < If >
 //                    | < Stop >
 //                    | < Sum >                       
+//                    | < Loop >
 ASTNode *CalculatorParser::parse_expression() {
   if(has(CalculatorLexer::ID)) {
     ASTNode *left = parse_ref();
@@ -35,6 +38,8 @@ ASTNode *CalculatorParser::parse_expression() {
   } else if(has(CalculatorLexer::STOP)) {
     next();
     return new StopNode();
+  } else if(has(CalculatorLexer::LBRACE)) {
+    return parse_loop();
   }
   
   return parse_sum();
@@ -62,6 +67,7 @@ ASTNode *CalculatorParser::parse_sum() {
 
 // < Sum' > ::= ADD <Term> <Sum'>
 //                   | SUB <Term> <Sum'>
+//                   | EQUAL < Term > < Sum' >
 //                   | ""
 ASTNode *CalculatorParser::parse_sum2(ASTNode *left) {
   BinopNode *result = nullptr;
@@ -72,6 +78,9 @@ ASTNode *CalculatorParser::parse_sum2(ASTNode *left) {
   } else if (has(CalculatorLexer::SUB)) {
     next(); // consume SUB
     result = new SubtractNode();
+  } else if (has(CalculatorLexer::EQUAL)) {
+    next(); // consume EQUAL
+    result = new EqualNode();
   }
 
   if(result) {
@@ -172,9 +181,10 @@ ASTNode *CalculatorParser::parse(CalculatorLexer *lexer) {
   next(); 
   
   ASTNode *result = parse_statements();
-  if (_cur.tok != CalculatorLexer::EOI) {
+  if (_cur.tok != CalculatorLexer::EOI && _cur.tok != CalculatorLexer::EOL) {
     throw std::runtime_error("Unexpected tokens at the end of expression");
   }
+
   return result;
 }
 
@@ -214,5 +224,27 @@ ASTNode *CalculatorParser::parse_statements() {
     consume = true;
   } while(has(CalculatorLexer::SEMI));
 
+  return node;
+}
+
+// a loop consisting of { statements }
+ASTNode *CalculatorParser::parse_loop() {
+  if(has(CalculatorLexer::LBRACE)) {
+    next();
+  } else {
+    throw std::runtime_error("Expected {");
+  }
+  
+  StatementsNode *body = (StatementsNode*) parse_statements();
+  
+  if(has(CalculatorLexer::RBRACE)) {
+    next();
+  } else {
+    throw std::runtime_error("Expected }");
+  }
+
+  // build the loop node
+  LoopNode *node = new LoopNode();
+  node->body(body);
   return node;
 }

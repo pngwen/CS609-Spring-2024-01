@@ -65,6 +65,9 @@ private:
 
   // collection of statements
   ASTNode *parse_statements();
+
+  // a loop consisting of { statements }
+  ASTNode *parse_loop();
 };
 
 #endif
